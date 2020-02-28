@@ -152,6 +152,7 @@ export default {
         hasInputElement: {type: Boolean, default: true},
         inputAttributes: {type: Object},
         selectableYearRange: {type: Number, default: 40},
+        isBirthdate: {type: Boolean, default: false},
         parseDate: {type: Function},
         formatDate: {type: Function},
         pickTime: {type: Boolean, default: false},
@@ -271,7 +272,11 @@ export default {
             const years = [];
             const currentYear = this.currentPeriod.year;
             const startYear = currentYear - this.selectableYearRange;
-            const endYear = currentYear + this.selectableYearRange;
+            let endYear = currentYear + this.selectableYearRange;
+
+            if(this.isBirthdate) {
+                endYear = currentYear;
+            }
 
             for (let i = startYear; i <= endYear; i++) {
                 years.push(i);
